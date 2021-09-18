@@ -1,5 +1,5 @@
 #!/bin/bash 
 
-# Script to handle randomized ip routing in expressvpn CLI.  Prioritizes US networks/ip with low latency.
-
-expressvpn connect ${vpn_alias}
+# Test script to handle  ip routing in expressvpn CLI. 
+expressvpn disconnect
+expressvpn connect ${random_alias}

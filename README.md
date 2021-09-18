@@ -1,2 +1,3 @@
 # Trulia-Web-Scraper
-See tests/ for early stages of dev.
+Currently in early stages of development. See tests/
+ 
