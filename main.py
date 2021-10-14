@@ -28,8 +28,9 @@ import time
 
 class Main:
     """
-    Note: Test build.
-
+    Source property data from trulia real estate.  
+    Main.dispatch() controls the execution of tasks at a high level.  
+    functions called through dispatch() will comprise of multiple enclosures to optimize refactorability. 
     """
     base_url = "https://www.trulia.com/" # Gather grab cookies and headers for requests
     sitemap  = "https://www.trulia.com/sitemaps/xml/p/index.xml" #XML list of gz compressed urls for all properties.
@@ -44,8 +45,8 @@ class Main:
     async def fetch_urls(self, session, gzip_url) -> list:
         """
         Fetch listings wrapper. 
-        Uses nested functions as there is room to implement more control flows
-        in pipeline.  For example extracting urls from rental-properties sitemap.
+        Uses nested functions as there is room to implement more control flows in pipeline.  
+        For example extracting urls from rental-properties sitemap.
         """
         async def load_in_urls(filename) -> dict:
             """
@@ -116,7 +117,7 @@ class Main:
             modal_box = "?mid=0#lil-mediaTab" # Replace '-mediaTab' for different requests/data ie '-crime' returns requests to api for crime stats/rate.
             async with driver.get(str(listing_url) + str(modal_box)) as response: # Load modal and imageset requests with 'response'
                 _requests = await response.requests # List of requests. Parse for imagset urls.
-                requests = re.find_all(_requests, ("/pictures/thumbs_5/zillowstatic")) # Parse list for thumbnail image urls.
+                requests = re.find_all(_requests, ("/pictures/thumbs_5/zillowstatic")) # Parse list of network connections for thumbnail image urls.
                 self.image_requests.append(requests)
 
         async def download_images():
@@ -178,12 +179,13 @@ class Main:
                     "Cooling": cooling,
                     "Description": description,
                     "Images": image_arr} #TODO 
+            pass #TODO 
 
         # Extract Listings
         # Initiate webdriver.
         options = Options()
         options.headless = True
-        driver = webdriver.Firefox(options=options,executable_path=r"../geckodriver") # Make sure the driver is an exe.
+        driver = webdriver.Firefox(options=options,executable_path=r"geckodriver") # Make sure the driver is an exe.  Intended to be run in linux vm. 
 
         # Get listing response
         async with session.get(listing_url) as resp:
@@ -193,10 +195,11 @@ class Main:
             datapoints = await parse_html()
 
             # Get listing images' urls with webdriver 
-            await interceptor() # Call interceptor. Aggregates all requests for property images. -> self.image_requests
+            imageset_requests = await interceptor() # Call interceptor. Aggregates all requests for property images. 
             images_task = [download_images() for image_url in imageset_requests]
             get_images = await asyncio.gather(*images_task)
-
+        
+        # Load into DB 
 
 
 
