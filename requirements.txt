@@ -17,7 +17,7 @@ hpack==4.0.0
 hyperframe==6.0.1
 idna==3.2
 kaitaistruct==0.9
-lxml==4.6.3
+lxml==4.6.5
 multidict==5.1.0
 numpy==1.21.2
 packaging==21.0
