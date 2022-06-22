@@ -19,7 +19,7 @@ idna==3.2
 kaitaistruct==0.9
 lxml==4.6.3
 multidict==5.1.0
-numpy==1.21.2
+numpy==1.22.0
 packaging==21.0
 Pillow==8.3.2
 pkg_resources==0.0.0
